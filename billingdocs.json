@@ -1,0 +1,335 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Caex Billing Module",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://193.122.185.100:8443/ords/bac-qa/caex/main"
+    }
+  ],
+  "paths": {
+    "/charges": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "description": "Retrieve records from Charges",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "description": "Implicit parameter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caex_user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "charge_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The queried record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_response": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/BAC_CHARGES"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Charges"
+        ],
+        "description": "Create a new record on Charges",
+        "parameters": [
+          {
+            "name": "caex_user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/BAC_CHARGES"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The successfully created record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_response": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/BAC_CHARGES"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "payload"
+      }
+    },
+    "/charges/{id}": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "description": "Retrieve records from Charges",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "description": "Implicit parameter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "implicit",
+            "required": true,
+            "schema": {
+              "pattern": "^[^/]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "caex_user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "charge_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The queried record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_response": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/BAC_CHARGES"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Charges"
+        ],
+        "description": "Update a record from Charges",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "implicit",
+            "required": true,
+            "schema": {
+              "pattern": "^[^/]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "caex_user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/BAC_CHARGES"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_response": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/BAC_CHARGES"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The successfully created record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_response": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/BAC_CHARGES"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "payload"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BAC_CHARGES": {
+        "type": "object",
+        "properties": {
+          "CHARGE_ID": {
+            "type": "integer"
+          },
+          "LEGAL_ENTITY_ID": {
+            "type": "integer"
+          },
+          "OPERATING_UNIT_ID": {
+            "type": "integer"
+          },
+          "CHARGE_DATE": {
+            "type": "string"
+          },
+          "SOURCE_ID": {
+            "type": "integer"
+          },
+          "PRODUCT_ID": {
+            "type": "integer"
+          },
+          "RECEIPT_METHOD_ID": {
+            "type": "integer"
+          },
+          "BILLABLE_ACCOUNT_ID": {
+            "type": "integer"
+          },
+          "BILL_TO_SITE_ID": {
+            "type": "integer"
+          },
+          "BILLABLE_CONTRACT_ID": {
+            "type": "integer"
+          },
+          "TAX_ID": {
+            "type": "integer"
+          },
+          "PERIOD_ID": {
+            "type": "integer"
+          },
+          "CURRENCY_CODE": {
+            "type": "string"
+          },
+          "PRODUCT_AMOUNT": {
+            "type": "integer"
+          },
+          "SERVICE_AMOUNT": {
+            "type": "integer"
+          },
+          "GUARANTEE_AMOUNT": {
+            "type": "integer"
+          },
+          "GROUPING_BATCH_ID": {
+            "type": "integer"
+          },
+          "BILLING_CYCLE_ID": {
+            "type": "integer"
+          },
+          "DESCRIPTION": {
+            "type": "string"
+          },
+          "ORIG_SYSTEM": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth": {
+        "type": "oauth2",
+        "description": "OAuth 2.0 with Client Credentias Grant type",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://193.122.185.100:8443/ords/bac/oauth/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}
