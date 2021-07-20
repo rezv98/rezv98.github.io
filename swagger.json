@@ -1,0 +1,951 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ORDS API Clientes",
+    "version": "1.0.0"
+  },
+  "host": "193.122.185.100:8443",
+  "basePath": "/ords/bac-qa/caex/cmdm",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/customer": {
+      "post": {
+        "description": "Servicio web para agregar un cliente.",
+        "responses": {
+          "201": {
+            "description": "Registro creado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "CUSTOMER_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "CLIENT_TYPE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "BUSINESS_NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "SURNAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "REGISTER_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "IDENTIFIER_TYPE_1": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "IDENTIFIER_NUMBER_1": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "IDENTIFIER_TYPE_2": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "IDENTIFIER_NUMBER_2": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "IDENTIFIER_TYPE_3": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "IDENTIFIER_NUMBER_3": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "BILLING_CYCLE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CUSTOMER"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}": {
+      "put": {
+        "description": "Servicio web para actualizar un cliente.",
+        "responses": {
+          "200": {
+            "description": "Registro actualizado con éxito.",
+            "schema": {
+              "$ref": "#/definitions/CUSTOMER"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CUSTOMER"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/accounts": {
+      "post": {
+        "description": "Servicio web para agregar una cuenta asociada a un cliente.",
+        "responses": {
+          "201": {
+            "description": "Registro creado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ACCOUNT_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "ACCOUNT_NUMBER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ACCOUNT_DESCRIPTION": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ACCOUNT_TYPE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ACCOUNT_STABLISHED_DATE": {
+                  "$ref": "#/definitions/TIMESTAMP"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ACCOUNT"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/accounts/{account_id}": {
+      "put": {
+        "description": "Servicio web para actualizar una cuenta asociada a un cliente.",
+        "responses": {
+          "200": {
+            "description": "Registro actualizado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ACCOUNT_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "ACCOUNT_NUMBER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ACCOUNT_DESCRIPTION": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ACCOUNT_TYPE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ACCOUNT_STABLISHED_DATE": {
+                  "$ref": "#/definitions/TIMESTAMP"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador de la cuenta",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ACCOUNT"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/accounts/{account_id}/sites": {
+      "post": {
+        "description": "Servicio web para agregar un sitio asociado a una cuenta.",
+        "responses": {
+          "201": {
+            "description": "Registro creado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "SITE_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "ACCOUNT_ADDRESS_SET": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "FROM_DATE": {
+                  "$ref": "#/definitions/DATE"
+                },
+                "SITE_NUMBER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "SITE_NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "COUNTRY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ADDRESS": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "POSTAL_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "STATE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "COUNTY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "CITY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "BILL_TO": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "SHIP_TO": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "BUSINESS_UNIT": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "LEDGER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "RECEIVABLE_ACCOUNT": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "PAYMENT_TERM": {
+                  "$ref": "#/definitions/VARCHAR2"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador de la cuenta",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SITE"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/accounts/{account_id}/sites/{site_id}": {
+      "put": {
+        "description": "Servicio web para actualizar un sitio asociado a una cuenta.",
+        "responses": {
+          "200": {
+            "description": "Registro actualizado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "SITE_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "ACCOUNT_ADDRESS_SET": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "FROM_DATE": {
+                  "$ref": "#/definitions/DATE"
+                },
+                "SITE_NUMBER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "SITE_NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "COUNTRY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "ADDRESS": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "POSTAL_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "STATE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "COUNTY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "CITY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "BILL_TO": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "SHIP_TO": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "BUSINESS_UNIT": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "LEDGER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "RECEIVABLE_ACCOUNT": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "PAYMENT_TERM": {
+                  "$ref": "#/definitions/VARCHAR2"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador de la cuenta",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del sitio",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SITE"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/communications": {
+      "post": {
+        "description": "Servicio web para agregar un contacto asociado a un cliente.",
+        "responses": {
+          "201": {
+            "description": "Registro creado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "COMMUNICATION_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "FIRST_NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "LAST_NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "PRIMARY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "TYPE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "PURPOSE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "VALUE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/COMMUNICATION"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/communications/{communication_id}": {
+      "put": {
+        "description": "Servicio web para actualizar un contacto asociado a un cliente.",
+        "responses": {
+          "200": {
+            "description": "Registro actualizado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "COMMUNICATION_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "FIRST_NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "LAST_NAME": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "PRIMARY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "TYPE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "PURPOSE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "VALUE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "communication_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador del contacto",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/COMMUNICATION"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/fiscal_classifications": {
+      "post": {
+        "description": "Servicio web para agregar un código de clasificación fiscal asociado a un cliente.",
+        "responses": {
+          "201": {
+            "description": "Registro creado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "FISCAL_CLASSIFICATION_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "FISCAL_CLASSIFICATION_TYPE_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "FISCAL_CLASSIFICATION_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "START_DATE": {
+                  "$ref": "#/definitions/DATE"
+                },
+                "END_DATE": {
+                  "$ref": "#/definitions/DATE"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FISCAL_CLASSIFICATION"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/fiscal_classifications/{fiscal_classification_id}": {
+      "put": {
+        "description": "Servicio web para actualizar un código de clasificación fiscal asociado a un cliente.",
+        "responses": {
+          "200": {
+            "description": "Registro actualizado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "FISCAL_CLASSIFICATION_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "FISCAL_CLASSIFICATION_TYPE_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "FISCAL_CLASSIFICATION_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "START_DATE": {
+                  "$ref": "#/definitions/DATE"
+                },
+                "END_DATE": {
+                  "$ref": "#/definitions/DATE"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "fiscal_classification_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del código de clasificación fiscal",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FISCAL_CLASSIFICATION"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/tax_profiles": {
+      "post": {
+        "description": "Servicio web para agregar un perfil de impuesto asociado a un cliente.",
+        "responses": {
+          "201": {
+            "description": "Registro creado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TAX_PROFILE_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "COUNTRY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "REGISTRATION_NUMBER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "TAX_REGIME_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "TAX": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "START_DATE": {
+                  "$ref": "#/definitions/DATE"
+                },
+                "END_DATE": {
+                  "$ref": "#/definitions/DATE"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TAX_PROFILE"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/{customer_id}/tax_profiles/{tax_profile_id}": {
+      "put": {
+        "description": "Servicio web para actualizar un perfil de impuesto asociado a un cliente.",
+        "responses": {
+          "200": {
+            "description": "Registro actualizado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TAX_PROFILE_ID": {
+                  "$ref": "#/definitions/NUMBER"
+                },
+                "COUNTRY": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "REGISTRATION_NUMBER": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "TAX_REGIME_CODE": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "TAX": {
+                  "$ref": "#/definitions/VARCHAR2"
+                },
+                "START_DATE": {
+                  "$ref": "#/definitions/DATE"
+                },
+                "END_DATE": {
+                  "$ref": "#/definitions/DATE"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del cliente",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "tax_profile_id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador del perfil de impuesto",
+            "pattern": "^[^/]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Estructura de registro",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TAX_PROFILE"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CHAR": {
+      "type": "string"
+    },
+    "DATE": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-[01]\\d-[0123]\\dT[012]\\d:[0-5]\\d:[0-5]\\d(.\\d+)?(Z|([-+][012]\\d:[0-5]\\d))$"
+    },
+    "NUMBER": {
+      "type": "number"
+    },
+    "TIMESTAMP": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-[01]\\d-[0123]\\dT[012]\\d:[0-5]\\d:[0-5]\\d(.\\d+)?(Z|([-+][012]\\d:[0-5]\\d))$"
+    },
+    "VARCHAR2": {
+      "type": "string"
+    },
+    "CUSTOMER": {
+      "type": "object",
+      "properties": {
+        "CLIENT_TYPE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "BUSINESS_NAME": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "NAME": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "SURNAME": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "REGISTER_CODE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "IDENTIFIER_TYPE_1": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "IDENTIFIER_NUMBER_1": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "IDENTIFIER_TYPE_2": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "IDENTIFIER_NUMBER_2": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "IDENTIFIER_TYPE_3": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "IDENTIFIER_NUMBER_3": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "BILLING_CYCLE": {
+          "$ref": "#/definitions/VARCHAR2"
+        }
+      }
+    },
+    "ACCOUNT": {
+      "type": "object",
+      "properties": {
+        "ACCOUNT_NUMBER": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "ACCOUNT_DESCRIPTION": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "ACCOUNT_TYPE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "ACCOUNT_STABLISHED_DATE": {
+          "$ref": "#/definitions/TIMESTAMP"
+        }
+      }
+    },
+    "SITE": {
+      "type": "object",
+      "properties": {
+        "ACCOUNT_ADDRESS_SET": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "FROM_DATE": {
+          "$ref": "#/definitions/DATE"
+        },
+        "SITE_NUMBER": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "SITE_NAME": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "COUNTRY": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "ADDRESS": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "POSTAL_CODE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "STATE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "COUNTY": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "CITY": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "BILL_TO": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "SHIP_TO": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "BUSINESS_UNIT": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "LEDGER": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "RECEIVABLE_ACCOUNT": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "PAYMENT_TERM": {
+          "$ref": "#/definitions/VARCHAR2"
+        }
+      }
+    },
+    "COMMUNICATION": {
+      "type": "object",
+      "properties": {
+        "FIRST_NAME": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "LAST_NAME": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "PRIMARY": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "TYPE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "PURPOSE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "VALUE": {
+          "$ref": "#/definitions/VARCHAR2"
+        }
+      }
+    },
+    "TAX_PROFILE": {
+      "type": "object",
+      "properties": {
+        "COUNTRY": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "REGISTRATION_NUMBER": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "TAX_REGIME_CODE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "TAX": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "START_DATE": {
+          "$ref": "#/definitions/DATE"
+        },
+        "END_DATE": {
+          "$ref": "#/definitions/DATE"
+        }
+      }
+    },
+    "FISCAL_CLASSIFICATION": {
+      "type": "object",
+      "properties": {
+        "FISCAL_CLASSIFICATION_TYPE_CODE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "FISCAL_CLASSIFICATION_CODE": {
+          "$ref": "#/definitions/VARCHAR2"
+        },
+        "START_DATE": {
+          "$ref": "#/definitions/DATE"
+        },
+        "END_DATE": {
+          "$ref": "#/definitions/DATE"
+        }
+      }
+    }
+  }
+}
